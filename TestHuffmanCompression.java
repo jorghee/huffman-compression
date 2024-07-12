@@ -7,22 +7,37 @@ public class TestHuffmanCompression {
     String text = "ata la jaca a la estaca";
     Map<Character, Integer> frequencyMap = new HashMap<>();
 
-    // Count the frequency of each character in the text
-    for (char c : text.toCharArray())
-      frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
+    // Paso 1: Calcular las frecuencias de los caracteres
+    frequencyMap = HuffmanCompression.buildFrequencyMap(text);
 
-    // Build Huffman Tree
+    // Imprimir frecuencias de los caracteres
+    HuffmanCompression.printCharacterFrequencies(frequencyMap);
+
+    // Imprimir nodos ordenados por su frecuencia de menor a mayor
+    HuffmanCompression.printSortedNodes(frequencyMap);
+
+    // Paso 2: Construir el árbol de Huffman
     Node root = HuffmanCompression.buildHuffmanTree(frequencyMap);
 
-    // Generate Huffman Codes
+    // Imprimir el árbol de Huffman en formato gráfico
+    System.out.println("\nHuffman Tree:");
+    HuffmanCompression.printHuffmanTree(root);
+
+    // Paso 3: Generar los códigos de Huffman
     Map<Character, String> huffmanCodes = HuffmanCompression.generateHuffmanCodes(root);
+    System.out.println("\nHuffman Codes:");
+    for (Map.Entry<Character, String> entry : huffmanCodes.entrySet()) {
+      System.out.println(entry.getKey() + ": " + entry.getValue());
+    }
 
-    // Compress the text
+    // Paso 4: Comprimir el texto
     String compressedText = HuffmanCompression.compress(text, huffmanCodes);
-    System.out.println("Compressed Text: " + compressedText);
+    System.out.println("\nCompressed Text:");
+    System.out.println(compressedText);
 
-    // Decompress the text
+    // Paso 5: Descomprimir el texto
     String decompressedText = HuffmanCompression.decompress(compressedText, root);
-    System.out.println("Decompressed Text: " + decompressedText);
+    System.out.println("\nDecompressed Text:");
+    System.out.println(decompressedText + "\n");
   }
 }

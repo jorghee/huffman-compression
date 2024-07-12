@@ -1,5 +1,10 @@
 *.class
-_minted-huffman-compression/
 *.aux
 *.log
 *.out
+*.toc
+*.pyg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+_minted-huffman-compression/

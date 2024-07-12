@@ -1,18 +1,17 @@
 package huffman;
 
-import java.util.Queue;
-import java.util.PriorityQueue;
+import priorityqueue.*;
 import java.util.Map;
 import java.util.HashMap;
 
 public class HuffmanCompression {
 
   public static Node buildHuffmanTree(Map<Character, Integer> frequencyMap) {
-    Queue<Node> priorityQueue = new PriorityQueue<>();
+    PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
 
     // Create a leaf node for each character and add it to the priority queue
     for (Map.Entry<Character, Integer> entry : frequencyMap.entrySet())
-      priorityQueue.add(new Node(entry.getKey(), entry.getValue()));
+      priorityQueue.add(new Node(entry.getKey(), entry.getValue()), entry.getValue());
 
     /* While there are more than one nodes in the queue, merge the two nodes with the
      * lowest frequency.
@@ -22,7 +21,7 @@ public class HuffmanCompression {
       left = priorityQueue.poll();
       right = priorityQueue.poll();
       mergedNode = new Node(left.frequency + right.frequency, left, right);
-      priorityQueue.add(mergedNode);
+      priorityQueue.add(mergedNode, mergedNode.frequency);
     }
 
     // The remaining node is the root of the Huffman tree

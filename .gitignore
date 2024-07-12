@@ -1,1 +1,5 @@
 *.class
+_minted-huffman-compression/
+*.aux
+*.log
+*.out
